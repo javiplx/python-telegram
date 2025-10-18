@@ -4,29 +4,13 @@ import platform
 import ctypes.util
 from ctypes import CDLL, CFUNCTYPE, c_int, c_char_p, c_double, c_void_p, c_longlong
 from typing import Any, Dict, Optional, Union
-import importlib.resources
 
 logger = logging.getLogger(__name__)
 
 
-def _get_tdjson_lib_path() -> str:
-    system_library = ctypes.util.find_library("tdjson")
-
-    if system_library is not None:
-        return system_library
-
-    if platform.system().lower() == "darwin":
-        lib_name = "darwin/libtdjson.dylib"
-    else:
-        lib_name = "linux/libtdjson.so"
-
-    return str(importlib.resources.files("telegram").joinpath(f"lib/{lib_name}"))
-
-
 class TDJson:
-    def __init__(self, library_path: Optional[str] = None, verbosity: int = 2) -> None:
-        if library_path is None:
-            library_path = _get_tdjson_lib_path()
+    def __init__(self, verbosity: int = 2) -> None:
+        library_path = ctypes.util.find_library("tdjson")
         logger.info('Using shared library "%s"', library_path)
 
         self._build_client(library_path, verbosity)

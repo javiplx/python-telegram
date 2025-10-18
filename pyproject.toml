@@ -40,8 +40,6 @@ zip-safe = false
 
 [tool.setuptools.package-data]
 telegram = [
-    "lib/darwin/*",
-    "lib/linux/*",
     "py.typed",
 ]
 

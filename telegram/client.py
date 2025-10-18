@@ -59,7 +59,6 @@ class Telegram:
         database_encryption_key: Union[str, bytes],
         phone: Optional[str] = None,
         bot_token: Optional[str] = None,
-        library_path: Optional[str] = None,
         worker: Optional[Type[BaseWorker]] = None,
         files_directory: Optional[Union[str, Path]] = None,
         use_test_dc: bool = False,
@@ -81,7 +80,6 @@ class Telegram:
             api_id - ID of your app (https://my.telegram.org/apps/)
             api_hash - api_hash of your app (https://my.telegram.org/apps/)
             phone - your phone number
-            library_path - you can change path to the compiled libtdjson library
             worker - worker to process updates
             files_directory - directory for the tdlib's files (database, images, etc.)
             use_test_dc - use test datacenter
@@ -94,7 +92,6 @@ class Telegram:
         """
         self.api_id = api_id
         self.api_hash = api_hash
-        self.library_path = library_path
         self.phone = phone
         self.bot_token = bot_token
         self.use_test_dc = use_test_dc
@@ -141,7 +138,7 @@ class Telegram:
         self._results: Dict[str, AsyncResult] = {}
         self._update_handlers: DefaultDict[str, List[Callable]] = defaultdict(list)
 
-        self._tdjson = TDJson(library_path=library_path, verbosity=tdlib_verbosity)
+        self._tdjson = TDJson(verbosity=tdlib_verbosity)
         self._run()
 
         if login:

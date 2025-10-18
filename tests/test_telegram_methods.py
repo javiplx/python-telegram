@@ -10,7 +10,6 @@ from telegram.text import Spoiler
 API_ID = 1
 API_HASH = "hash"
 PHONE = "+71234567890"
-LIBRARY_PATH = "/lib/"
 DATABASE_ENCRYPTION_KEY = "changeme1234"
 
 
@@ -25,7 +24,6 @@ def _get_telegram_instance(**kwargs):
     kwargs.setdefault("api_id", API_ID)
     kwargs.setdefault("api_hash", API_HASH)
     kwargs.setdefault("phone", PHONE)
-    kwargs.setdefault("library_path", LIBRARY_PATH)
     kwargs.setdefault("database_encryption_key", DATABASE_ENCRYPTION_KEY)
 
     with patch("telegram.client.TDJson"):
@@ -41,7 +39,6 @@ class TestTelegram:
             Telegram(
                 api_id=API_ID,
                 api_hash=API_HASH,
-                library_path=LIBRARY_PATH,
                 database_encryption_key=DATABASE_ENCRYPTION_KEY,
             )
             assert "You must provide bot_token or phone" in str(excinfo.value)
