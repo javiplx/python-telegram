@@ -1,0 +1,5 @@
+python-telegram (0.19.0-1) unstable; urgency=low
+
+  * Initial debian package release
+
+ -- Javier Palacios <javiplx@gmail.com>  Sat, 18 Oct 2025 11:00:21 +0200

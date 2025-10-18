@@ -1,0 +1,9 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+export PYBUILD_DISABLE=test
+export PYBUILD_INSTALL_ARGS_python3=--install-lib=/usr/lib/python3/dist-packages
+
+%:
+	dh $@ --buildsystem=pybuild
+
