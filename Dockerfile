@@ -1,5 +1,8 @@
-FROM python:3.10.0-bullseye
+FROM debian:trixie-slim
 
-RUN python3 -m pip install python-telegram
+RUN apt-get update \
+    && apt-get install -y git vim-tiny \
+    && apt-get install -y debhelper
 
-ADD ./examples/*.py /app/examples/
+RUN apt-get build-dep -y .
+RUN dpkg-buildpackage -rfakeroot -i -us -uc
